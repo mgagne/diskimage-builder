@@ -41,10 +41,10 @@ function get_ubuntu_tarball() {
             # downloading the larger image), and then if the sums still fail retry
             # the image.
             $TMP_HOOKS_PATH/bin/cache-url -f $SHA256SUMS $CACHED_SUMS
-            if ! grep "$BASE_IMAGE_FILE" $CACHED_SUMS | sha256sum --check - ; then
+            if ! grep "${BASE_IMAGE_FILE}$" $CACHED_SUMS | sha256sum --check - ; then
                 $TMP_HOOKS_PATH/bin/cache-url -f \
                     $DIB_CLOUD_IMAGES/$BASE_IMAGE_FILE $CACHED_FILE
-                grep "$BASE_IMAGE_FILE" $CACHED_SUMS | sha256sum --check -
+                grep "${BASE_IMAGE_FILE}$" $CACHED_SUMS | sha256sum --check -
             fi
         fi
         popd
